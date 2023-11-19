@@ -21,7 +21,7 @@ app.secret_key = 'secret-key'
 @app.route('/', methods = ['POST', 'GET'])
 def index():
     if('user' in session):
-        return 'Hello {}'.format(session['user'])
+        return redirect('/select_role')
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('Password')
@@ -30,7 +30,38 @@ def index():
             session['user'] = email
         except: 
             return 'Failed to log in '
-    return render_template('home.html')
+    return render_template('login.html')
+
+@app.route('/select_role', methods=['POST', 'GET'])
+def select_role():
+    if 'user' not in session: 
+        return redirect('/')
+    if request.method == 'POST':
+        role = request.form.get('role')
+        print(role)
+        if role == 'student':
+            return render_template('student_page.html') # Redirect to student page
+        elif role == 'advisor':
+            return render_template('advisor_page.html') # Redirect to advisor page
+
+    return render_template('select_role.html')
+    
+@app.route('/student_page', methods = ['POST', 'GET'])
+def student_page():
+    if 'user' not in session:
+        return redirect('/')
+    return render_template('student_page.html')
+
+@app.route('/advisor_page', methods = ['POST', 'GET'])
+def advisor_page():
+    if 'user' not in session:
+        return redirect('/')
+    
+    return render_template('advisor_page.html')
+
+    
+    
+    
 
 @app.route('/logout')
 def logout():
