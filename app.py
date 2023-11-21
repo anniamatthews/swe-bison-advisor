@@ -1,5 +1,11 @@
+
 from flask import Flask, session, render_template, request, redirect
 import pyrebase
+import firebase_admin
+from firebase_admin import firestore, credentials
+from flask_wtf import FlaskForm
+
+
 
 app = Flask(__name__)
 
@@ -10,11 +16,12 @@ config = {
     'storageBucket': "advisor-dev-95e86.appspot.com",
     'messagingSenderId': "162788724888",
     'appId': "1:162788724888:web:8240e343dfba0beade80ed",
-    'databaseURL' : ''
+    'databaseURL' : 'https://advisor-dev-95e86-default-rtdb.firebaseio.com/'
 }
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
+db = firebase.database()
 
 app.secret_key = 'secret-key'
 
@@ -45,22 +52,48 @@ def select_role():
             return render_template('advisor_page.html') # Redirect to advisor page
 
     return render_template('select_role.html')
-    
+
+
 @app.route('/student_page', methods = ['POST', 'GET'])
 def student_page():
-    if 'user' not in session:
+    if 'user' not in session: 
         return redirect('/')
+    if request.method =='POST':
+        option = request.form.get('action')
+        if option == 'action1':
+            return render_template('add_classes.html')
+        elif option =='action2':
+            return 'action2 selected'
+    
     return render_template('student_page.html')
 
 @app.route('/advisor_page', methods = ['POST', 'GET'])
 def advisor_page():
-    if 'user' not in session:
+    if 'user' not in session: 
         return redirect('/')
-    
+    if request.method =='POST':
+        option = request.form.get('option')
+        if option == 'option1':
+            return 'option1 selected'
+        elif option =='option2':
+            return 'option2 selected'
     return render_template('advisor_page.html')
 
+@app.route('/add_classes.html', methods = ['POST', 'GET'])
+def add_classes():
+    if 'user' not in session: 
+        return redirect('/')
+    if request.method =='POST':
+        class_name = request.form.get('className')
+        class_credits = request.form.get('creditNumber')
+        class_grade = request.form.get('grade')
+        db.child("names").push({'class_name': class_name,'class_credits': class_credits, 'class_grade': class_grade})
+        return redirect('/student_page')
+    return render_template('add_classes.html')
+
     
-    
+
+
     
 
 @app.route('/logout')
