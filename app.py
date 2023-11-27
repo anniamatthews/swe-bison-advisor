@@ -87,6 +87,7 @@ def postskill():
         return redirect('/')
     if request.method =='POST':
         # this needs to be a loop or something so that it can be stored into the db
+        
         names = request.form.getlist('name[]')
         credits = request.form.getlist('credit[]')
         grades = request.form.getlist('grade[]')
@@ -100,7 +101,10 @@ def postskill():
             })
             
 
-            
+
+
+    # next step: openAI integration: https://www.youtube.com/watch?v=Vo1_9-qVCM4
+       
         
     return render_template('add_classes.html')
 
