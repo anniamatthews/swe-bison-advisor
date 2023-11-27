@@ -1,75 +1,79 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Input Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        form {
-            max-width: 400px;
-            margin: auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-
-    <form action = '/add_classes' method="post" id = 'classForm'>
-        <label for="className">Class Name:</label>
-        <input type="text" id="className" name="className" required>
-
-        <label for="creditNumber">Number of Credits:</label>
-        <input type="number" id="creditNumber" name="creditNumber" min = "1"  required>
-
-        <label for="grade">Letter Grade Received:</label>
-        <input type="text" id="grade" name="grade" required>
-
-        <hstack>
-            <button type="button" onclick=resetForm() id="addAnotherClassBtn" >Add Another Class</button>
-            <button type= "button" onclick=showOptions() id="goToStudentPageBtn" >Go back to student homepage</button>
-        </hstack>
-    </form>
-
-
-    <script>
-        function resetForm() {
-            
-
-            document.getElementById("classForm").reset();
-        }
-
-        function showOptions(){
-            window.location.href = '/student_page';
-        }
-    </script>
-
-</body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Information about your classes here</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+    </head>
+    <body>
+        <script>
+       $(document).ready(function() {
+         
+       var MaxInputs       = 8; //maximum input boxes allowed
+       var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID
+       var AddButton       = $("#AddMoreFileBox"); //Add button ID
+         
+       var x = InputsWrapper.length; //initlal text box count
+       var FieldCount=1; //to keep track of text box added
+         
+       $(AddButton).click(function (e)  //on add input button click
+       {
+               if(x <= MaxInputs) //max input box allowed
+               {
+                   FieldCount++; //text box added increment
+                   //add input box
+                   $(InputsWrapper).append('<div class="row"><div class="col-xs-2"><input type="text" placeholder="Class name" class="form-control name_list" name="name[]" /></div><div class="col-xs-2"><input type="number" placeholder="Credit" class="form-control credit_list" name="credit[]" /></div><div class="col-xs-2"><input type="text" placeholder="Grade" class="form-control grade_list" name="grade[]" /></div><a href="#" class="btn btn-danger removeclass">×</a></div>');
+                   x++; //text box increment
+               }
+       return false;
+       });
+         
+       $("body").on("click",".removeclass", function(e){ //user click on remove text
+               if( x > 1 ) {
+                       $(this).parent('div').remove(); //remove text box
+                       x--; //decrement textbox
+               }
+       return false;
+       })
+        $('#submit').click(function(){            
+                  $.ajax({  
+                       url:"/postskill",  
+                       method:"POST",  
+                       data:$('#add_skills').serialize(),  
+                       success:function(data)  
+                       {  alert(data)
+                            $('#resultbox').html(data);  
+                            $('#add_skills')[0].reset();  
+                       }  
+                  });  
+             }); 
+       });
+       </script>
+       <style>
+       .row {padding:10px;}
+       </style>
+       <div class="container">  
+                       <br />  
+                       <br />  
+                       <h2 align="center">Add Information about your classes here</h2><div id="resultbox"></div>  
+                       <div class="form-group">  
+                            <form name="add_skills" id="add_skills">  
+                                           <div id="InputsWrapper">
+                 <div class="row">
+                                                <div class="col-xs-2"><input type="text" name="name[]" placeholder="Class name" class="form-control name_list" /></div>
+                                                <div class="col-xs-2"><input type="number" name="credit[]" placeholder="Credits" class="form-control credit_list" /></div>
+                                                <div class="col-xs-2"><input type="text" name="grade[]" placeholder="Grade" class="form-control grade_list" /></div>
+                                                <div class="col-xs-2"><button type="button" name="add" id="AddMoreFileBox" class="btn btn-success">Add More</button></div>
+                                                
+                  </div>
+                </div>
+                <br/>
+                                      <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />  
+                            </form>  
+                       </div>  
+                  </div>  
+       </body>
 </html>
