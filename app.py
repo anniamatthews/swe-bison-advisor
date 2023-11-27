@@ -63,7 +63,9 @@ def student_page():
         if option == 'action1':
             return render_template('add_classes.html')
         elif option =='action2':
-            return 'action2 selected'
+            return render_template('student_resource_location_a.html')
+        elif option == 'action3':
+            return render_template('self_service_resources.html')
     
     return render_template('student_page.html')
 
@@ -91,7 +93,8 @@ def add_classes():
         return redirect('/student_page')
     return render_template('add_classes.html')
 
-    
+
+
 
 
     
