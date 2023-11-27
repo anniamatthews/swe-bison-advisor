@@ -2,7 +2,7 @@
 from flask import Flask, session, render_template, request, redirect
 import pyrebase
 import firebase_admin
-from firebase_admin import firestore, credentials
+from firebase_admin import firestore, credentials, db
 from flask_wtf import FlaskForm
 
 
@@ -81,16 +81,27 @@ def advisor_page():
             return 'option2 selected'
     return render_template('advisor_page.html')
 
-@app.route('/add_classes.html', methods = ['POST', 'GET'])
-def add_classes():
+@app.route("/postskill",methods=["POST","GET"])
+def postskill():
     if 'user' not in session: 
         return redirect('/')
     if request.method =='POST':
-        class_name = request.form.get('className')
-        class_credits = request.form.get('creditNumber')
-        class_grade = request.form.get('grade')
-        db.child("names").push({'class_name': class_name,'class_credits': class_credits, 'class_grade': class_grade})
-        return redirect('/student_page')
+        # this needs to be a loop or something so that it can be stored into the db
+        names = request.form.getlist('name[]')
+        credits = request.form.getlist('credit[]')
+        grades = request.form.getlist('grade[]')
+        
+
+        for i in range(len(names)):
+            new_entry_ref = db.child("names").push(data={
+                'class_name': names[i],
+                'class_credits': credits[i],
+                'class_grade': grades[i]
+            })
+            
+
+            
+        
     return render_template('add_classes.html')
 
 
