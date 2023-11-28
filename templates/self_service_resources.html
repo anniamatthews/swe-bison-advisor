@@ -3,23 +3,64 @@
     <head>
         <meta charset ="utf-8">
         <meta name ="viewport" content ="width=device-width, initial-scale=1">
-        <title>Self-Service Resource Tab</title>
-        <body>
-            <h1>Student Self-Service Resources</h1>
-            
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Integer commodo tristique pellentesque. Sed pellentesque, nisi in vulputate molestie, neque nunc aliquam massa, nec bibendum orci nunc a urna. 
-                Proin rhoncus lobortis dui nec feugiat. Sed at mi felis. Proin mi quam, blandit eu feugiat nec, ultrices id metus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                Proin non tortor viverra turpis cursus interdum a ac ante. Suspendisse quis libero ac justo dictum ultrices nec nec dolor. Mauris ornare, dolor ut varius pellentesque, mi nulla imperdiet elit, id mollis elit nisl eget enim. 
-                Nunc vulputate felis at quam congue viverra. Suspendisse tincidunt nisi ut enim fringilla euismod. Maecenas finibus elementum maximus.
-            </p>
-                Praesent dolor diam, posuere id scelerisque congue, convallis ut nisi. Fusce porta lacus quis ipsum malesuada aliquam. 
-                Vivamus egestas ante nec velit sagittis posuere. Phasellus eget semper tortor, non faucibus quam. Duis euismod sit amet magna sit amet malesuada. 
-                In at vulputate lacus. Nullam accumsan vulputate felis, ac maximus urna tempor sed. Ut nulla metus, euismod ut dui nec, tempor pharetra sem.
-            <p>
+        <style> 
 
-            </p>
+        /*Underline*/
+        .underline
+        {
+            text-decoration: underline solid black 6px;
+        }
+
+        /**Header Title*/
+        h1 
+        {
+            text-align: center;
+            font-size: 40pt;
+        } 
+
+        /*Columns*/
+        .multicolumns
+        {
+            /*Column Settings*/
+            column-count:2;
+            column-gap: 10%;
+            column-rule-style: groove;
+            font-size: 20px
+            
+            
+        }
+
+        /*Link Settings*/
+        a:visited {color:blueviolet;}
+        a:link{color:rgb(7, 7, 51);}
+        
+
+
+        </style>
+        <title>Self-Service Resource Tab</title>
+        
+        <body>
+            <h1 class = "underline"> Student Self-Service Resources</h1>
+            <div class = "multicolumns">
+              <ul style = "border-style:outset;border-width:8px;margin:-1px;height:250px">
+                <b style = "border-style:solid;border-width:3px;margin:100px;">Academic Assistance</b>
+                <br>
+                
+                <li> <a href="tutors_portal_page.html"><b>Tutors Portal</b></a></li>
+                <li> <a href="course_catalog_page.html"><b>Course Catalog</b></a></li>
+                <li> <a href="academic_clubs_workshops_page.html"><b>Academic Clubs/Workshops</b></a></li>
+              </ul>
+
+              <ul style = "border-style:outset;border-width:8px;height:-1px;height:250px">
+                <b style = "border-style:solid;border-width:3px;margin:110px;font-size:20px;">Learning Centers</b>
+                <br>
+                <li><a href="tutoring_center_page.html", class="external" ><b>Tutoring Center</b></a></li>
+                <li> <a href="university_libraries_page.html"><b>University Libraries</b></a></li>
+                <li> <a href="university_bookstores_page.html"><b>University Bookstore</b></a></li>
+                <li> <a href="university_laboratory_facilities.html"><b>Academic Laboratory Facilities</b></a></li>
+              </ul>
+            </div>
+        
         </body>
     </head>
 </html>
