@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Bookstores Tab</title>
+        <style>
+            /**Header Settings*/
+            h1
+            {
+                text-align: center;
+                font: size 40x;
+                text-decoration: underline solid black 6px;
+
+            }   
+           /**Page Settings*/
+            div.content
+            {
+                width:auto
+            }
+
+
+            /**Left Side of Bookstore Search Box*/
+            .row 
+            {
+             display: flex;
+             
+            }
+            /* Left column (menu) */
+            .left 
+            {
+                flex: 35%;
+                padding: 15px 0;
+            }
+            .left h2 
+            {
+                padding-left: 8px;
+            }
+            /* Right column (page content) */
+            .right 
+            {
+                flex: 65%;
+                padding: 15px;
+            }
+            /* Style the search box */
+             #mySearch 
+                {
+                    width: 100%;
+                    font-size: 18px;
+                    padding: 16px;
+                    border: 1px solid #ddd;
+                }
+
+            /*Dropdown Hover Button*/
+            body{
+                min-height:100vh;
+                display:flex;
+                justify-content:center;
+                
+              }
+
+              .dropdown {
+                display: inline-block;
+                position: relative;
+                
+              }
+              
+              button{
+                border:none;
+                border-radius:5px;
+                padding:5px 10px;
+                font-size:18px;
+                cursor:pointer;
+                
+              }
+              
+              button:hover{
+                background-color:#ddd;
+              }
+              
+              .dropdown-options {
+                display: none;
+                position: absolute;
+                overflow: auto;
+                background-color:#fff;
+                border-radius:5px;
+                box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+              }
+              
+              .dropdown:hover .dropdown-options {
+                display: block;
+              }
+              
+              .dropdown-options a
+               {
+                display: block;
+                color: #000000;
+                padding: 500px;
+                text-decoration: none;
+                padding: 10x;
+              }
+
+              .dropdown-options a:hover {
+                color: #0a0a23;
+                background-color: #ddd;
+                border-radius:5px;
+              }
+
+        </style>
+        <body>
+        <div class="content">
+            <h1>University Bookstores</h1>
+            <div class="row">
+                <div class="left" style="background-color:#bbb;">
+                  <h2>Category Selection</h2>
+                  <input type="text" id="mySearch" placeholder="Search.." title="Type in a category">
+
+                    <div class="dropdown;row" style="height:40px;margin-left:-1%;">
+                        <button><b>Course Textbooks</b></button>
+                        <div class="dropdown-options">
+                            <a href="#">Architecture Textbook</a>
+                            <a href="#">Mathematics Textbook</a>
+                            <a href="#">History Textbook</a>
+                            <a href="#">World Languages Textbook</a>
+                            <a href="#">Economics Textbook</a>
+                            <a href="#">Political Science Textbook</a>
+                            <a href="#">Computer Science Textbook</a>
+                            <a href="#">Nutrition Textbook</a>
+                            <a href="#">Management Textbook</a>
+                            <a href="#">Accounting Textbook</a>
+                            <a href="#">Mechanical Engineering Textbook</a>
+                            <a href="#">Nursing Textbook</a>
+                        </div>
+                    </div>  
+
+                    <div class="dropdown;row" style="height:40px;">
+                      <button><b>Lab Equipment</b></button>
+                        <div class="dropdown-options">
+                            <a href="#">Safety Eye Goggles</a>
+                            <a href="#">Lab Coat</a>
+                            <a href="#">Latex Glove Box</a>
+                            <a href="#">Lab Measuring Toolkit</a>
+                            <a href="#">Beakers</a>
+                            <a href="#">Flasks</a>
+                            <a href="#">Stethoscope</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown;row" style="height:40px;">
+                        <button><b>Technology</b></button>
+                        <div class="dropdown-options">
+                            <a href="#">Laptop Accessories</a>
+                            <a href="#">Cellphone Accessories</a>
+                            <a href="#">Audio Accessories</a>
+                            <a href="#">Calculators</a>
+                        </div>
+                    </div>         
+
+                    <div class="dropdown;row" style="height:40px;">
+                        <button><b>Online Course Subscriptions</b></button>
+                        <div class="dropdown-options">
+                            <a href="#">Mathematics Course Subscriptions</a>
+                            <a href="#">Computer Science Course Subscriptions</a>
+                            <a href="#">Nutrition Course Subscriptions</a>
+                            <a href="#">Management Course Subscriptions</a>
+                            <a href="#">Accounting Course Subscriptions</a>
+                            <a href="#">Mechanical Engineering Course Subscriptions</a>
+                            <a href="#">Nursing Course Subscriptions</a>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown;row" style="height:40px;">
+                        <button><b>Apparel</b></a></button>
+                        <div class="dropdown-options">
+                            <a href="#">Hats</a>
+                            <a href="#">Jackets</a>
+                            <a href="#">Sweaters</a>
+                            <a href="#">Gloves</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown;row" style="height:40px;">
+                        <button><b>School Supplies</b></button>
+                        <div class="dropdown-options">
+                            <a href="#">Backpacks</a>
+                            <a href="#">Writing Utensils</a>
+                            <a href="#">Erasers</a>
+                            <a href="#">Art Utensils</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown;row" style="height:40px;">
+                        <button><b>Miscellaneous</b></button>
+                        <div class="dropdown-options">
+                            <a href="#">Batteries</a>
+                            <a href="#">Car Ornaments</a>
+                            <a href="#">Home Groomings</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="right" style="background-color:#ddd;">
+                  <h2>University Bookstore Home Search Page</h2>
+                  <p>Welcome to the University Bookstore!</p>
+                  <p>SFeel free to browse and add whatever essentials you need for this semester.</p>
+                  <p>Use the category dropboxes on the left the to see what's currently available for purchase.</p>
+                </div>
+              </div>
+        </div>
+        </body>
+    </head>
+</html>
+
