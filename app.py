@@ -1,13 +1,22 @@
 
-from flask import Flask, session, render_template, request, redirect
+from flask import Flask, session, render_template, request, redirect, flash, url_for
+from werkzeug.utils import secure_filename
 import pyrebase
 import firebase_admin
+import uuid
+import os
 from firebase_admin import firestore, credentials, db
 from flask_wtf import FlaskForm
 
 
+UPLOAD_FOLDER = '/Users/test/bison-swe/uploaded_files'
+ALLOWED_EXTENSIONS = {'txt', 'pdf'}
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+
 
 config = {    
     'apiKey': "AIzaSyDoZdVffsnC7h6FsYO5aPvaELW2BLERW9Y",
@@ -22,6 +31,10 @@ config = {
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
+storage = firebase.storage()
+
+
+
 
 app.secret_key = 'secret-key'
 
@@ -76,7 +89,7 @@ def advisor_page():
     if request.method =='POST':
         option = request.form.get('option')
         if option == 'option1':
-            return 'option1 selected'
+            return render_template('course_catalog.html')
         elif option =='option2':
             return 'option2 selected'
     return render_template('advisor_page.html')
@@ -98,16 +111,49 @@ def postskill():
                 'class_credits': credits[i],
                 'class_grade': grades[i]
             })
-            
-
-            
-        
+                 
     return render_template('add_classes.html')
 
 
 
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
+@app.route('/course_catalog', methods=['GET', 'POST'])
+def upload_file():
+    if request.method =='POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect('course_catalog.html')
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('upload_file', name=filename))
+    return render_template('course_catalog.html')
+        
+        
+    
+
+
+
+
+
+
+def generate_unique_id():
+    unique_id = str(uuid.uuid4())
+    return unique_id
     
 
 @app.route('/logout')
