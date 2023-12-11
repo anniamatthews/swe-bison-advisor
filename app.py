@@ -76,11 +76,23 @@ def student_page():
         if option == 'action1':
             return render_template('add_classes.html')
         elif option =='action2':
-            return render_template('student_resource_location_a.html')
+            return render_template('student_location.html')
         elif option == 'action3':
             return render_template('self_service_resources.html')
     
     return render_template('student_page.html')
+
+
+# /university_bookstores_page
+@app.route('/university_bookstores_page', methods = ['POST', 'GET'])
+def bookstores():
+    return render_template('university_bookstores_page.html')
+
+
+
+
+
+
 
 @app.route('/advisor_page', methods = ['POST', 'GET'])
 def advisor_page():
@@ -106,7 +118,8 @@ def postskill():
         
 
         for i in range(len(names)):
-            new_entry_ref = db.child("names").push(data={
+            new_entry_ref = db.child("names").push(data={ # change 'names' to uuid generated token, to be different logins
+                
                 'class_name': names[i],
                 'class_credits': credits[i],
                 'class_grade': grades[i]
@@ -145,10 +158,6 @@ def upload_file():
         
         
     
-
-
-
-
 
 
 def generate_unique_id():
