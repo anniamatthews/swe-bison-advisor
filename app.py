@@ -83,16 +83,6 @@ def student_page():
     return render_template('student_page.html')
 
 
-# /university_bookstores_page
-@app.route('/university_bookstores_page', methods = ['POST', 'GET'])
-def bookstores():
-    return render_template('university_bookstores_page.html')
-
-
-
-
-
-
 
 @app.route('/advisor_page', methods = ['POST', 'GET'])
 def advisor_page():
@@ -103,7 +93,7 @@ def advisor_page():
         if option == 'option1':
             return render_template('course_catalog.html')
         elif option =='option2':
-            return 'option2 selected'
+            return 'TODO: Check on students'
     return render_template('advisor_page.html')
 
 @app.route("/postskill",methods=["POST","GET"])
